@@ -13,29 +13,28 @@ const winLayouts = [
 let playerRound = 0;
 let gameState = ["","","","","","","","",""];
 
-function winCheck(winLayouts, gameState, player) 
+function winCheck(winLayouts, gameState, player, trials) 
 {
+    let isWin = false;
     for(let i = 0; i <=7; i++)
     {
         const winCondition = winLayouts[i];
         let a = gameState[winCondition[0]];
         let b = gameState[winCondition[1]];
         let c = gameState[winCondition[2]];
-        if (a === '' || b === '' || c === '') {
+        if(a === '' || b === '' || c === '') {
             continue;
         }
-        if (a === b && b === c) {
-            document.write(player +" WIN")
+        if(a === b && b === c) {
+            document.write(player +" WIN");
+            isWin = true;
             break
         }
-    }
-}
-
-function draw(x) 
-{
-    if(x == 9)
-    {
-        document.write("REMIS");
+        else if(trials == 9 && isWin == false)
+        {
+            document.write("DRAW");
+            break;
+        }
     }
 }
 
@@ -54,7 +53,7 @@ function playGame()
                 console.log(gameState);
     
                 fields[i].removeEventListener("click", write);
-                winCheck(winLayouts, gameState, player);
+                winCheck(winLayouts, gameState, player, playerRound);
             }
             else
             {
@@ -66,10 +65,9 @@ function playGame()
                 console.log(gameState);
     
                 fields[i].removeEventListener("click", write);
-                winCheck(winLayouts, gameState, player);
+                winCheck(winLayouts, gameState, player, playerRound);
             }
             
-            draw(playerRound);
         });
         
     }
