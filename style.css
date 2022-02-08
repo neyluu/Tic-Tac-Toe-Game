@@ -1,0 +1,59 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+:root {
+    --cellBorder: 3px solid black;
+}
+
+#play-field {
+    width: 100%;
+    margin: 50px auto 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 400px;
+    height: 400px;
+    font-size: 50px;
+    border-collapse: collapse;
+}
+td {
+    text-align: center;
+    width: 33%;
+    height: 33%;
+}
+td:hover {
+    cursor: pointer;
+}
+.cell-1 {
+}
+.cell-2 {
+    border-right: var(--cellBorder);
+    border-left: var(--cellBorder);
+}
+.cell-3 {
+}
+.cell-4 {
+    border-top: var(--cellBorder);
+    border-bottom: var(--cellBorder);
+}
+.cell-5 {
+    border: var(--cellBorder);
+}
+.cell-6 {
+    border-top: var(--cellBorder);
+    border-bottom: var(--cellBorder);
+}
+.cell-7 {
+}
+.cell-8 {
+    border-right: var(--cellBorder);
+    border-left: var(--cellBorder);
+}
+.cell-9 {
+}
