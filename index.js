@@ -1,4 +1,5 @@
 const fields = document.getElementsByTagName("td");
+const result = document.getElementsByClassName("result");
 const winLayouts = [
     [0, 1, 2],
     [3, 4, 5],
@@ -12,10 +13,25 @@ const winLayouts = [
 
 let playerRound = 0;
 let gameState = ["","","","","","","","",""];
+let isWin = false;
+
+// nie działa
+function gameOver() 
+{
+    for(let i = 0; i < fields.length; i++)
+    {   
+        if(gameState[i] == "")
+        {
+            fields[i].addEventListener("click", function endGame(){
+                fields[i].innerHTML = "";
+            });
+        }
+        
+    }
+}
 
 function winCheck(winLayouts, gameState, player, trials) 
 {
-    let isWin = false;
     for(let i = 0; i <=7; i++)
     {
         const winCondition = winLayouts[i];
@@ -26,15 +42,15 @@ function winCheck(winLayouts, gameState, player, trials)
             continue;
         }
         if(a === b && b === c) {
-            document.write(player +" WIN");
+            result[0].innerHTML = player + "WIN";
             isWin = true;
-            break
+            gameOver(gameState);
         }
-        else if(trials == 9 && isWin == false)
-        {
-            document.write("DRAW");
-            break;
-        }
+    }
+    if(trials == 9 && isWin == false)
+    {
+        result[0].innerHTML = "DRAW";
+        gameOver(gameState);
     }
 }
 
@@ -60,16 +76,14 @@ function playGame()
                 let player="o"
                 fields[i].innerHTML = "o";
                 playerRound++;
-               
+                
                 gameState[i] = player;
                 console.log(gameState);
     
                 fields[i].removeEventListener("click", write);
                 winCheck(winLayouts, gameState, player, playerRound);
             }
-            
         });
-        
     }
 }
 playGame();
