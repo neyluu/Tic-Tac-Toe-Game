@@ -20,6 +20,7 @@ function gameReset()
 {
     let resetButton = document.getElementsByClassName("reset-button")
     resetButton[0].addEventListener("click", function(){
+        window.location.reload(true);
         //nie działa
         // for(let i = 0; i <= fields.length; i++)
         // {
@@ -37,21 +38,11 @@ function gameReset()
         // playGame();
         
         //reset odświeża stronę
-        window.location.reload(true);
     });
 }
 
-function gameOver(gameState) 
+function gameOver() 
 {
-    for(let i = 0; i < fields.length; i++)
-    {   
-        if(gameState[i] == "")
-        {
-            fields[i].addEventListener("click", function endGame(){
-                fields[i].innerHTML = "";
-            });
-        }    
-    }
     reset[0].innerHTML = "<button class='reset-button'>RESET</button>"
     gameReset();
 }
@@ -68,16 +59,15 @@ function winCheck(winLayouts, gameState, player, trials)
             continue;
         }
         if(a === b && b === c) {
-            //player sie zmienia po wygranej, do poprawy
-            result[0].innerHTML = player + "WIN";
+            result[0].innerHTML = player + " WIN";
             isWin = true;
-            gameOver(gameState);
+            gameOver();
         }
     }
     if(trials == 9 && isWin == false)
     {
-        result[0].innerHTML = "DRAW";
-        gameOver(gameState);
+        result[0].innerHTML = " DRAW";
+        gameOver();
     }
 }
 
@@ -88,27 +78,31 @@ function playGame()
         fields[i].addEventListener("click", function write(){
             if(playerRound%2 == 0)
             {
-                let player = "x";
-                fields[i].innerHTML = "x";
-                playerRound++;
-            
-                gameState[i] = player;
-                console.log(gameState);
-    
-                fields[i].removeEventListener("click", write);
-                winCheck(winLayouts, gameState, player, playerRound);
+                if(isWin == false)
+                {
+                    let player = "x";
+                    fields[i].innerHTML = "x";
+                    playerRound++;
+                
+                    gameState[i] = player;
+        
+                    fields[i].removeEventListener("click", write);
+                    winCheck(winLayouts, gameState, player, playerRound);
+                }
             }
             else
             {
-                let player="o"
-                fields[i].innerHTML = "o";
-                playerRound++;
-                
-                gameState[i] = player;
-                console.log(gameState);
-    
-                fields[i].removeEventListener("click", write);
-                winCheck(winLayouts, gameState, player, playerRound);
+                if(isWin == false)
+                {
+                    let player="o"
+                    fields[i].innerHTML = "o";
+                    playerRound++;
+                    
+                    gameState[i] = player;
+        
+                    fields[i].removeEventListener("click", write);
+                    winCheck(winLayouts, gameState, player, playerRound);
+                }
             }
         });
     }
