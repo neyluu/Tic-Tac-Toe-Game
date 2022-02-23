@@ -15,29 +15,23 @@ const winLayouts = [
 let playerRound = 0;
 let gameState = ["","","","","","","","",""];
 let isWin = false;
+let player;
 
 function gameReset()
 {
     let resetButton = document.getElementsByClassName("reset-button")
+    
     resetButton[0].addEventListener("click", function(){
-        window.location.reload(true);
-        //nie działa
-        // for(let i = 0; i <= fields.length; i++)
-        // {
-        //     if(gameState != "")
-        //     {
-        //         fields[i].innerHTML = "";
-        //     }
-        // }
-        // gameState = ["","","","","","","","",""];
-        // playerRound = 0;
-        // isWin = false;
-        // console.log("resetPlaterRound " + playerRound);
-        // console.log("resetGameState " + gameState);
-        // console.log("resetIsWin " + isWin);
-        // playGame();
-        
         //reset odświeża stronę
+        // window.location.reload(true);
+
+        document.querySelectorAll('td').forEach(td => td.innerHTML = "");
+        result[0].innerHTML = "";
+        reset[0].innerHTML = "";
+       
+        playerRound = 0;
+        gameState = ["","","","","","","","",""];
+        isWin = false;
     });
 }
 
@@ -47,7 +41,7 @@ function gameOver()
     gameReset();
 }
 
-function winCheck(winLayouts, gameState, player, trials) 
+function winCheck(gameState, player, trials) 
 {
     for(let i = 0; i <=7; i++)
     {
@@ -55,10 +49,12 @@ function winCheck(winLayouts, gameState, player, trials)
         let a = gameState[winCondition[0]];
         let b = gameState[winCondition[1]];
         let c = gameState[winCondition[2]];
-        if(a === '' || b === '' || c === '') {
+        if(a === '' || b === '' || c === '')
+        {
             continue;
         }
-        if(a === b && b === c) {
+        if(a === b && b === c)
+        {
             result[0].innerHTML = player + " WIN";
             isWin = true;
             gameOver();
@@ -67,6 +63,7 @@ function winCheck(winLayouts, gameState, player, trials)
     if(trials == 9 && isWin == false)
     {
         result[0].innerHTML = " DRAW";
+        isWin = true;
         gameOver();
     }
 }
@@ -76,35 +73,31 @@ function playGame()
     for(let i = 0; i < fields.length; i++)
     {
         fields[i].addEventListener("click", function write(){
-            if(playerRound%2 == 0)
+            if(gameState[i] == "" && isWin == false)
             {
-                if(isWin == false)
+                if(playerRound%2 == 0)
                 {
-                    let player = "x";
+                    player = "x";
                     fields[i].innerHTML = "x";
-                    playerRound++;
-                
                     gameState[i] = player;
-        
-                    fields[i].removeEventListener("click", write);
-                    winCheck(winLayouts, gameState, player, playerRound);
                 }
-            }
-            else
-            {
-                if(isWin == false)
+                else
                 {
-                    let player="o"
+                    player="o"
                     fields[i].innerHTML = "o";
-                    playerRound++;
-                    
                     gameState[i] = player;
-        
-                    fields[i].removeEventListener("click", write);
-                    winCheck(winLayouts, gameState, player, playerRound);
                 }
+                playerRound++;
+                winCheck(gameState, player, playerRound);
             }
         });
     }
 }
 playGame();
+
+
+
+
+
+
+
