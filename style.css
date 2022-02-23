@@ -16,19 +16,19 @@
     justify-content: center;
 }
 
-table {
+table.play-field {
     width: 400px;
     height: 400px;
     font-size: 75px;
     border-collapse: collapse;
     font-family: 'Nunito', sans-serif;
 }
-td {
+td.cell {
     text-align: center;
     width: 33%;
     height: 33%;
 }
-td:hover {
+td.cell:hover {
     cursor: pointer;
 }
 .cell-1 {
@@ -81,6 +81,19 @@ td:hover {
     cursor: pointer;
 }
 
+.score table {
+    border-collapse: collapse;
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    margin: 30px auto 0 auto;
+}
+.score td {
+    border: 1px solid black;
+}
+
 /* ---------DARK THEME--------- */
 .body-dt {
     background-color: rgb(19, 23, 31);
@@ -88,5 +101,5 @@ td:hover {
 }
 
 .cell-dt {
-    border-color: rgb(147, 149, 160);
+    border-color: rgb(147, 149, 160) !important;
 }

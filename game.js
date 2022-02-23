@@ -1,6 +1,8 @@
-const fields = document.getElementsByTagName("td");
+const fields = document.getElementsByClassName("cell");
 const result = document.getElementsByClassName("result");
 const reset = document.getElementsByClassName("reset");
+const xPointsField = document.getElementsByClassName("x-points");
+const oPointsField = document.getElementsByClassName("o-points");
 const winLayouts = [
     [0, 1, 2],
     [3, 4, 5],
@@ -16,6 +18,7 @@ let playerRound = 0;
 let gameState = ["","","","","","","","",""];
 let isWin = false;
 let player;
+let xPoints = 0, oPoints = 0;
 
 function gameReset()
 {
@@ -25,7 +28,7 @@ function gameReset()
         //reset odświeża stronę
         // window.location.reload(true);
 
-        document.querySelectorAll('td').forEach(td => td.innerHTML = "");
+        document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
         result[0].innerHTML = "";
         reset[0].innerHTML = "";
        
@@ -57,6 +60,16 @@ function winCheck(gameState, player, trials)
         {
             result[0].innerHTML = player + " WIN";
             isWin = true;
+            if(player === "x")
+            {
+                xPoints++;
+                xPointsField[0].innerHTML = xPoints;
+            }
+            else if(player === "o")
+            {
+                oPoints++;
+                oPointsField[0].innerHTML = oPoints;
+            }
             gameOver();
         }
     }
@@ -94,10 +107,3 @@ function playGame()
     }
 }
 playGame();
-
-
-
-
-
-
-
