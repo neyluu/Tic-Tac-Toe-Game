@@ -1,4 +1,4 @@
-const fields = document.getElementsByClassName("cell");
+let fields;
 const result = document.getElementsByClassName("result");
 const reset = document.getElementsByClassName("reset");
 const xPointsField = document.getElementsByClassName("x-points");
@@ -15,9 +15,11 @@ const winLayouts = [
 ];
 
 let playerRound = 0;
-let gameState = ["","","","","","","","",""];
+let gameState = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
 let isWin = false;
+// let isReseted = true;
 let player;
+let rows;
 let xPoints = 0, oPoints = 0;
 
 function gameReset()
@@ -33,7 +35,7 @@ function gameReset()
         reset[0].innerHTML = "";
        
         playerRound = 0;
-        gameState = ["","","","","","","","",""];
+        gameState = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
         isWin = false;
     });
 }
@@ -46,46 +48,56 @@ function gameOver()
 
 function winCheck(gameState, player, trials) 
 {
-    for(let i = 0; i <=7; i++)
+    // for(let i = 0; i <=7; i++)
+    // {
+    //     const winCondition = winLayouts[i];
+    //     let a = gameState[winCondition[0]];
+    //     let b = gameState[winCondition[1]];
+    //     let c = gameState[winCondition[2]];
+    //     if(a === '' || b === '' || c === '')
+    //     {
+    //         continue;
+    //     }
+    //     if(a === b && b === c)
+    //     {
+    //         result[0].innerHTML = player + " WIN";
+    //         isWin = true;
+    //         if(player === "x")
+    //         {
+    //             xPoints++;
+    //             xPointsField[0].innerHTML = xPoints;
+    //         }
+    //         else if(player === "o")
+    //         {
+    //             oPoints++;
+    //             oPointsField[0].innerHTML = oPoints;
+    //         }
+    //         gameOver();
+    //     }
+    // }
+    // if(trials == (rows**2) && isWin == false)
+    // {
+    //     result[0].innerHTML = " DRAW";
+    //     isWin = true;
+    //     gameOver();
+    // }
+    //temp
+    if(trials == (rows*rows)) 
     {
-        const winCondition = winLayouts[i];
-        let a = gameState[winCondition[0]];
-        let b = gameState[winCondition[1]];
-        let c = gameState[winCondition[2]];
-        if(a === '' || b === '' || c === '')
-        {
-            continue;
-        }
-        if(a === b && b === c)
-        {
-            result[0].innerHTML = player + " WIN";
-            isWin = true;
-            if(player === "x")
-            {
-                xPoints++;
-                xPointsField[0].innerHTML = xPoints;
-            }
-            else if(player === "o")
-            {
-                oPoints++;
-                oPointsField[0].innerHTML = oPoints;
-            }
-            gameOver();
-        }
-    }
-    if(trials == 9 && isWin == false)
-    {
-        result[0].innerHTML = " DRAW";
-        isWin = true;
         gameOver();
     }
 }
 
 function playGame()
 {
+    fields = document.getElementsByClassName("cell");
+    // console.log(fields)
+    
     for(let i = 0; i < fields.length; i++)
     {
+        // console.log("work"+i)
         fields[i].addEventListener("click", function write(){
+            // console.log("cell " +i)
             if(gameState[i] == "" && isWin == false)
             {
                 if(playerRound%2 == 0)
@@ -102,8 +114,77 @@ function playGame()
                 }
                 playerRound++;
                 winCheck(gameState, player, playerRound);
+                // console.log(gameState)
             }
         });
     }
 }
-playGame();
+
+function generate()
+{
+    // isReseted = false;
+    document.getElementById("draw").addEventListener("click", function fieldGenerate(){
+        document.getElementsByClassName("play-field")[0].innerHTML = "";
+    
+        rows = parseInt(document.getElementById("rows").value);
+        
+        for(let i = 0; i < rows; i++)
+        {
+            document.getElementsByClassName("play-field")[0].innerHTML += "<tr></tr>";
+            let tr = document.getElementsByTagName("tr");
+            
+            for(let j = 0; j < rows; j++)
+            {
+                tr[i].innerHTML += "<td class='cell'></td>";
+            }
+        }
+        
+        let td = document.getElementsByClassName("cell");
+        // console.log(td);
+        let leftBorder = [], rightBorder = [];
+        let leftCell = 0, rightCell = rows - 1;
+        
+        for(let i = 0; i < rows; i++)
+        {
+            leftBorder[i] = leftCell;
+            leftCell = leftCell + rows;
+        }
+        for(let i = 0; i < rows; i++)
+        {
+            rightBorder[i] = rightCell;
+            rightCell = rightCell + rows;
+        }
+    
+        for(let i = 0; i < td.length; i++)
+        {
+            //border top
+            if(i <= rows)
+            {
+                td[i].classList.toggle("nbr-top");
+            }
+            //border bottom
+            if(i >= td.length-rows && i <= td.length)
+            {
+                td[i].classList.toggle("nbr-bottom");
+            }
+            //border left
+            for(let j = 0; j < leftBorder.length; j++)
+            {
+                if(leftBorder[j] == i)
+                {
+                    td[i].classList.toggle("nbr-left");
+                }
+            }
+            //border right
+            for(let k = 0; k < rightBorder.length; k++)
+            {
+                if(rightBorder[k] == i)
+                {
+                    td[i].classList.toggle("nbr-right");
+                }
+            }
+        }
+        playGame();
+    });
+}
+generate();
