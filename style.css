@@ -13,7 +13,9 @@ body {
     /* temp */
     background-color: rgb(105, 105, 105);
 }
-
+.event:hover {
+    background-color: pink;
+}
 .generator {
     width: 200px;
     height: 50px;

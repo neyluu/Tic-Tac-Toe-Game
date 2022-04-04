@@ -1,49 +1,57 @@
-let fields;
+import { winCombinations } from "./winCombinations.js";
+
 const result = document.getElementsByClassName("result");
 const reset = document.getElementsByClassName("reset");
 const xPointsField = document.getElementsByClassName("x-points");
 const oPointsField = document.getElementsByClassName("o-points");
-const winLayouts = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
 
 let playerRound = 0;
 let gameState = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
 let isWin = false;
-// let isReseted = true;
+let fields;
 let player;
 let rows;
 let xPoints = 0, oPoints = 0;
 
 function gameReset()
 {
-    let resetButton = document.getElementsByClassName("reset-button")
-    
-    resetButton[0].addEventListener("click", function(){
-        //reset odświeża stronę
-        // window.location.reload(true);
+    //reset odświeża stronę
+    // window.location.reload(true);
 
+    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    result[0].innerHTML = "";
+    playerRound = 0;
+    gameState = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+    isWin = false;
+}
+
+function gameOver() 
+{
+    let resetButton =  document.getElementsByClassName("reset-button");
+    resetButton[0].addEventListener("click", function()
+    {
         document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
         result[0].innerHTML = "";
-        reset[0].innerHTML = "";
-       
         playerRound = 0;
         gameState = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
         isWin = false;
     });
 }
 
-function gameOver() 
+function addPoints(player)
 {
-    reset[0].innerHTML = "<button class='reset-button'>RESET</button>"
-    gameReset();
+    isWin = true;
+
+    if(player === "x")
+    {
+        xPoints++;
+        xPointsField[0].innerHTML = xPoints;
+    }
+    else if(player === "o")
+    {
+        oPoints++;
+        oPointsField[0].innerHTML = oPoints;
+    }
 }
 
 function winCheck(gameState, player, trials) 
@@ -81,9 +89,72 @@ function winCheck(gameState, player, trials)
     //     isWin = true;
     //     gameOver();
     // }
-    //temp
-    if(trials == (rows*rows)) 
+    
+    let currentCombination = [];
+
+    for(let i = 0; i < gameState.length; i++)
     {
+        if(gameState[i] == player)
+        {
+            currentCombination.push(i.toString());
+        }
+    }
+    console.log(currentCombination);
+
+    let currentCombinationString = currentCombination.join("");
+    
+    if(rows == 3)
+    {
+        for(let i = 0; i < winCombinations.c3.length; i++)
+        {
+            if(currentCombinationString === winCombinations.c3[i])
+            {
+                //WIN
+                addPoints(player);
+                console.log("win");
+            }
+        }
+    }
+    if(rows == 4)
+    {
+        for(let i = 0; i < winCombinations.c4.length; i++)
+        {
+            if(currentCombinationString === winCombinations.c4[i])
+            {
+                //WIN
+                addPoints(player);
+                console.log("win");
+            }
+        }
+    }
+    if(rows == 5)
+    {
+        for(let i = 0; i < winCombinations.c5.length; i++)
+        {
+            if(currentCombinationString === winCombinations.c5[i])
+            {
+                //WIN
+                addPoints(player);
+                console.log("win");
+            }
+        }
+    }
+    if(rows == 6)
+    {
+        for(let i = 0; i < winCombinations.c6.length; i++)
+        {
+            if(currentCombinationString === winCombinations.c6[i])
+            {
+                //WIN
+                addPoints(player);
+                console.log("win");
+            }
+        }
+    }
+    if(trials == (rows*rows) && isWin == false) 
+    {
+        result[0].innerHTML = " DRAW";
+        isWin = true;
         gameOver();
     }
 }
@@ -91,13 +162,12 @@ function winCheck(gameState, player, trials)
 function playGame()
 {
     fields = document.getElementsByClassName("cell");
-    // console.log(fields)
     
     for(let i = 0; i < fields.length; i++)
     {
-        // console.log("work"+i)
+        fields[i].classList.toggle("event"); //temp
+        
         fields[i].addEventListener("click", function write(){
-            // console.log("cell " +i)
             if(gameState[i] == "" && isWin == false)
             {
                 if(playerRound%2 == 0)
@@ -114,7 +184,6 @@ function playGame()
                 }
                 playerRound++;
                 winCheck(gameState, player, playerRound);
-                // console.log(gameState)
             }
         });
     }
@@ -122,7 +191,6 @@ function playGame()
 
 function generate()
 {
-    // isReseted = false;
     document.getElementById("draw").addEventListener("click", function fieldGenerate(){
         document.getElementsByClassName("play-field")[0].innerHTML = "";
     
@@ -140,7 +208,6 @@ function generate()
         }
         
         let td = document.getElementsByClassName("cell");
-        // console.log(td);
         let leftBorder = [], rightBorder = [];
         let leftCell = 0, rightCell = rows - 1;
         
@@ -184,7 +251,25 @@ function generate()
                 }
             }
         }
+        gameReset();
         playGame();
-    });
+    }); 
 }
 generate();
+
+
+
+
+
+
+
+
+
+//TESTOWY WINCHECK
+// let tabC = [0, 1, 2];
+// let tabU = [0, 2, 1];
+
+// if(tabU.includes(tabC[0]) && tabU.includes(tabC[1]) && tabU.includes(tabC[2]))
+// {
+//     console.log("win")
+// }
