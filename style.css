@@ -57,6 +57,14 @@ td.nbr-right {
     text-align: center;
 }
 
+.x {
+    color: red;
+}
+.o {
+    color: rgb(0, 204, 255);
+}
+
+
 .flex-center {
     display: flex;
     justify-content: center;
@@ -91,6 +99,8 @@ td.nbr-right {
 .score td {
     border: 1px solid black;
 }
+
+
 
 /* ----------DARK MODE SWITCH---------- */
 .switch {

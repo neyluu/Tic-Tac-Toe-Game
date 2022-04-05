@@ -1,5 +1,7 @@
 import { winCombinations } from "./winCombinations.js";
 
+console.log(winCombinations);
+
 const result = document.getElementsByClassName("result");
 const reset = document.getElementsByClassName("reset");
 const xPointsField = document.getElementsByClassName("x-points");
@@ -40,8 +42,9 @@ function gameOver()
 
 function addPoints(player)
 {
+    result[0].innerHTML = player + " WIN";
     isWin = true;
-
+    
     if(player === "x")
     {
         xPoints++;
@@ -52,64 +55,28 @@ function addPoints(player)
         oPoints++;
         oPointsField[0].innerHTML = oPoints;
     }
+    gameOver();
 }
 
 function winCheck(gameState, player, trials) 
 {
-    // for(let i = 0; i <=7; i++)
-    // {
-    //     const winCondition = winLayouts[i];
-    //     let a = gameState[winCondition[0]];
-    //     let b = gameState[winCondition[1]];
-    //     let c = gameState[winCondition[2]];
-    //     if(a === '' || b === '' || c === '')
-    //     {
-    //         continue;
-    //     }
-    //     if(a === b && b === c)
-    //     {
-    //         result[0].innerHTML = player + " WIN";
-    //         isWin = true;
-    //         if(player === "x")
-    //         {
-    //             xPoints++;
-    //             xPointsField[0].innerHTML = xPoints;
-    //         }
-    //         else if(player === "o")
-    //         {
-    //             oPoints++;
-    //             oPointsField[0].innerHTML = oPoints;
-    //         }
-    //         gameOver();
-    //     }
-    // }
-    // if(trials == (rows**2) && isWin == false)
-    // {
-    //     result[0].innerHTML = " DRAW";
-    //     isWin = true;
-    //     gameOver();
-    // }
-    
     let currentCombination = [];
 
     for(let i = 0; i < gameState.length; i++)
     {
         if(gameState[i] == player)
         {
-            currentCombination.push(i.toString());
+            currentCombination.push(i);
         }
     }
-    console.log(currentCombination);
-
-    let currentCombinationString = currentCombination.join("");
+    // console.log(currentCombination);
     
     if(rows == 3)
     {
         for(let i = 0; i < winCombinations.c3.length; i++)
         {
-            if(currentCombinationString === winCombinations.c3[i])
+            if(isWin == false && currentCombination.includes(winCombinations.c3[i][0]) && currentCombination.includes(winCombinations.c3[i][1]) && currentCombination.includes(winCombinations.c3[i][2]))
             {
-                //WIN
                 addPoints(player);
                 console.log("win");
             }
@@ -119,21 +86,19 @@ function winCheck(gameState, player, trials)
     {
         for(let i = 0; i < winCombinations.c4.length; i++)
         {
-            if(currentCombinationString === winCombinations.c4[i])
+            if(isWin == false && currentCombination.includes(winCombinations.c4[i][0]) && currentCombination.includes(winCombinations.c4[i][1]) && currentCombination.includes(winCombinations.c4[i][2]) && currentCombination.includes(winCombinations.c4[i][3]))
             {
-                //WIN
                 addPoints(player);
                 console.log("win");
             }
-        }
+        }   
     }
     if(rows == 5)
     {
         for(let i = 0; i < winCombinations.c5.length; i++)
         {
-            if(currentCombinationString === winCombinations.c5[i])
+            if(isWin == false && currentCombination.includes(winCombinations.c5[i][0]) && currentCombination.includes(winCombinations.c5[i][1]) && currentCombination.includes(winCombinations.c5[i][2]) && currentCombination.includes(winCombinations.c5[i][3]) && currentCombination.includes(winCombinations.c5[i][4]))
             {
-                //WIN
                 addPoints(player);
                 console.log("win");
             }
@@ -143,14 +108,15 @@ function winCheck(gameState, player, trials)
     {
         for(let i = 0; i < winCombinations.c6.length; i++)
         {
-            if(currentCombinationString === winCombinations.c6[i])
+            if(isWin == false && currentCombination.includes(winCombinations.c6[i][0]) && currentCombination.includes(winCombinations.c6[i][1]) && currentCombination.includes(winCombinations.c6[i][2]) && currentCombination.includes(winCombinations.c6[i][3]) && currentCombination.includes(winCombinations.c6[i][4]) && currentCombination.includes(winCombinations.c6[i][5]))
             {
-                //WIN
                 addPoints(player);
                 console.log("win");
             }
         }
     }
+    
+    //DRAW
     if(trials == (rows*rows) && isWin == false) 
     {
         result[0].innerHTML = " DRAW";
@@ -173,13 +139,13 @@ function playGame()
                 if(playerRound%2 == 0)
                 {
                     player = "x";
-                    fields[i].innerHTML = "x";
+                    fields[i].innerHTML = "<span class='x'>x</span>";
                     gameState[i] = player;
                 }
                 else
                 {
                     player="o"
-                    fields[i].innerHTML = "o";
+                    fields[i].innerHTML = "<span class='o'>o</span>";
                     gameState[i] = player;
                 }
                 playerRound++;
@@ -256,20 +222,3 @@ function generate()
     }); 
 }
 generate();
-
-
-
-
-
-
-
-
-
-//TESTOWY WINCHECK
-// let tabC = [0, 1, 2];
-// let tabU = [0, 2, 1];
-
-// if(tabU.includes(tabC[0]) && tabU.includes(tabC[1]) && tabU.includes(tabC[2]))
-// {
-//     console.log("win")
-// }
