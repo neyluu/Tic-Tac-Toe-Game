@@ -8,51 +8,111 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="generator flex-center">
-        <select name="" id="rows">
-            <option value="3">3x3</option>
-            <option value="4">4x4</option>
-            <option value="5">5x5</option>
-            <option value="6">6x6</option>
-        </select>
-        <input type="submit" value="create" id="draw">
-    </div>
+    <div id="page">
+        <aside class="aside-main">
+            <label class="switch">
+                <input type="checkbox" name="theme" id="theme">
+                <span class="slider round"></span>
+            </label>
+            <label for="theme" class="theme-label">Dark Mode</label>
+        
+        </aside>
+        
+        <div id="main-page">
+            <div class="main-left">
+                <div class="generator">
+                    <h3>Choose size</h3>
+                        <div class="generator-form">
+                            <input type="radio" name="rows" id="rows-3" claas="rows" value="3" checked>
+                            <label for="rows-3" class="gform-label">3x3</label>
+                            
+                            <input type="radio" name="rows" id="rows-4" claas="rows" value="4">
+                            <label for="rows-4" class="gform-label">4x4</label>
+                
+                            <input type="radio" name="rows" id="rows-5" claas="rows" value="5">
+                            <label for="rows-5" class="gform-label">5x5</label>
+                    
+                            <input type="radio" name="rows" id="rows-6" claas="rows" value="6">
+                            <label for="rows-6" class="gform-label">6x6</label>
+                            
+                            <input type="submit" value="CREATE" id="generate">
+                        </div>
+                </div>
 
-    <!-- <button class="play">PLAY</button> -->
 
-    <div id="play-field">
-        <table class="play-field"></table>
+
+
+
+
+                <!-- <div class="generator flex-center">
+                    <select name="" id="rows">
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                        <option value="6">6x6</option>
+                    </select>
+                    <input type="submit" value="create" id="generate">
+                </div> -->
+            </div>
+            
+            <div class="main-middle">
+                <div id="play-field">
+                    <table class="play-field"></table>
+                </div>
+                
+                <div class="reset flex-center">
+                    <button class='reset-button'>RESET</button>
+                </div>
+            </div>
+            
+            <div class="main-right">
+                <div class="score">
+                    <table>
+                        <tr>
+                            <td>x</td>
+                            <td class="x-points">0</td>
+                        </tr>
+                        <tr>
+                            <td>o</td>
+                            <td class="o-points">0</td>
+                        </tr>
+                    </table>
+                    <button class="points-reset">RESET</button>
+                </div>
+                
+                <div class="result flex-center"></div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        
+            <!-- <button class="play">PLAY</button> -->
+        
+            
+        
+            
+            
+        </div>
     </div>
     
     
-    <div class="reset flex-center">
-        <button class='reset-button'>RESET</button>
-    </div>
-
-    <div class="score">
-        <table>
-            <tr>
-                <td>x</td>
-                <td class="x-points">0</td>
-            </tr>
-            <tr>
-                <td>o</td>
-                <td class="o-points">0</td>
-            </tr>
-        </table>
-    </div>
-    
-    <div class="result flex-center"></div>
-    
-    <label class="switch">
-        <input type="checkbox" name="theme" id="theme">
-        <span class="slider round"></span>
-    </label>
-    <label for="theme" class="theme-label">Dark Mode</label>
-
     <!-- <script src="generate.js"></script> -->
-    <script src="winCombinations.js" type="module"></script>
-    <script src="game.js" type="module"></script>
+    
+    <!-- cors blokuje, comb w game.js -->
+    <!-- <script src="winCombinations.js" type="module"></script> -->
+    <script src="game.js"></script>
     <script src="theme.js"></script>
 </body>
 </html>

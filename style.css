@@ -3,31 +3,148 @@
 	padding: 0;
 	box-sizing: border-box;
 	scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif;
 }
 
 :root {
     --cellBorder: 3px solid black;
+    --blueMain: #0069d9;
+    --blueLighter: #add4ff;
 }
 
 body {
     /* temp */
-    background-color: rgb(105, 105, 105);
+    /* background-color: rgb(105, 105, 105); */
 }
-.event:hover {
-    background-color: pink;
+
+#page {
+    display: flex;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+.aside-main {
+    max-width: 80px;
+    height: 100vh;
+    background-color: var(--blueMain);
+}
+
+#main-page {
+    background-color: rgb(232, 245, 252);
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.main-left {
+    /* background-color: pink; */
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .generator {
+    width: 350px;
+    height: 250px;
+    border-radius: 40px;
+    border: 2px solid var(--blueMain);
+    box-shadow: inset 0px 0px 13px -3px var(--blueMain);
+    background-color: var(--blueLighter);
+    font-size: 150%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.generator > h3 {
+    text-align: center;
+}
+.generator-form{
+    /* RESPONSYWNOŚĆ DO ZROBNIENIA */
+    display: grid;
+    grid-template-columns: 120px 120px;
+    grid-template-rows: 40px 40px 40px;
+    grid-gap: 8px;
+    margin-top: 20px;
+    /* border: solid 1px black; */
+    /* display: inline-block; */
+    /* border-radius: 10px; */
+    overflow: hidden;
+}
+input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+}
+.gform-label {
+    color: white;
+    /* display: inline-block; */
+    cursor: pointer;
+    /* font-weight: bold; */
+    /* padding: 5px 20px; */
+    text-align: center;
+    line-height: 40px;
+    background-color: var(--blueLighter);
+    box-shadow: inset 0px 0px 20px 3px var(--blueMain);
+    border: 2px solid var(--blueMain);
+    border-radius: 18px;
+}
+input[type=radio]:checked + .gform-label{
+    color: white;
+    background-color: var(--blueLighter);
+    box-shadow: inset 0px 0px 20px 15px var(--blueMain);
+}
+#generate {
+    /* KOLOR DO DOPASOWANIA */
+    grid-column: 1 / 3;
+    background-color: var(--blueLighter);
+    box-shadow: inset 0px 0px 20px 15px var(--blueMain);
+    border: 2px solid var(--blueMain);
+    border-radius: 18px;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    color: white
+}
+#generate:hover {
+    cursor: pointer;
+    background-color: #3980cc;
+}
+
+
+
+.main-middle {
+    /* background-color: rgb(192, 255, 241); */
+    width: 55%;
+}
+.main-right {
+    /* background-color: rgb(251, 255, 192); */
+    width: 20%;
+}
+
+
+
+
+
+
+
+/* .event:hover {
+    background-color: pink;
+} */
+/* .generator {
     width: 200px;
     height: 50px;
     margin: 0 auto;
-}
+} */
 
-#play-field {
+/* #play-field {
     width: 100%;
     margin: 50px auto 0 auto;
     display: flex;
     justify-content: center;
-}
+} */
 
 table.play-field {
     width: 400px;
@@ -41,6 +158,8 @@ table.play-field {
     height: 40px;
     border: 2px solid black;
 }
+
+/* BORDERS */
 td.nbr-top {
     border-top: none;
 }
@@ -53,6 +172,7 @@ td.nbr-left {
 td.nbr-right {
     border-right: none;
 }
+
 .cell {
     text-align: center;
 }
@@ -65,29 +185,35 @@ td.nbr-right {
 }
 
 
-.flex-center {
+/* .flex-center {
     display: flex;
     justify-content: center;
-}
+} */
 
-.result {
+/* .result {
     margin-top: 20px;
     text-transform: uppercase;
     font-size: 40px;
-}
+} */
 
-.reset > button {
+/* .reset > button {
     margin-top: 20px;
     width: 100px;
     height: 40px;
     font-size: 25px;
-}
+} */
 
-.reset > button:hover {
+/* .reset > button:hover {
     cursor: pointer;
-}
+} */
 
-.score table {
+/* .score {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+} */
+/* .score table {
     border-collapse: collapse;
     width: 100px;
     height: 50px;
@@ -95,11 +221,16 @@ td.nbr-right {
     text-align: center;
     font-family: 'Nunito', sans-serif;
     margin: 30px auto 0 auto;
-}
+} */
 .score td {
     border: 1px solid black;
 }
-
+/* .points-reset
+{
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+} */
 
 
 /* ----------DARK MODE SWITCH---------- */
@@ -149,10 +280,11 @@ input:checked + .slider:before {
 
 /* ---------DARK THEME--------- */
 .body-dt {
-    background-color: rgb(19, 23, 31) !important;
-    color: rgb(147, 149, 160) !important;
+    /*  !important */
+    background-color: rgb(19, 23, 31);
+    color: rgb(147, 149, 160);
 }
 
 .cell-dt {
-    border-color: rgb(147, 149, 160) !important;
+    border-color: rgb(147, 149, 160);
 }

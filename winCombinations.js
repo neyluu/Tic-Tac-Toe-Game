@@ -101,4 +101,4 @@ let winCombinations = {
           [5, 10, 15, 20, 25, 30]
      ]
 }
-export { winCombinations };
+// export { winCombinations };
