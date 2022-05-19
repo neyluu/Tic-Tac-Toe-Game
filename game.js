@@ -82,8 +82,7 @@ function gameReset()
 function gameOver() 
 {
     let resetButton =  document.getElementsByClassName("reset-button");
-    resetButton[0].addEventListener("click", function()
-    {
+    resetButton[0].addEventListener("click", function(){
         document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
         result[0].innerHTML = "";
         playerRound = 0;
@@ -225,8 +224,9 @@ function generate()
 
         for(let i = 0; i < rows; i++)
         {
-            document.getElementsByClassName("play-field")[0].innerHTML += "<tr></tr>";
-            let tr = document.getElementsByTagName("tr");
+            document.getElementsByClassName("play-field")[0].innerHTML += "<tr class='play-tr'></tr>";
+            // let tr = document.getElementsByTagName("tr");
+            let tr = document.getElementsByClassName("play-tr");
             
             for(let j = 0; j < rows; j++)
             {
@@ -283,3 +283,17 @@ function generate()
     }); 
 }
 generate();
+
+function pointsReset()
+{
+    const pointsResetButton = document.getElementsByClassName("points-reset");
+    
+    pointsResetButton[0].addEventListener("click", function()
+    {
+        xPoints = 0; 
+        oPoints = 0;
+        xPointsField[0].innerHTML = xPoints;
+        oPointsField[0].innerHTML = oPoints;
+    });
+}
+pointsReset();
