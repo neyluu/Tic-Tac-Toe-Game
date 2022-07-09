@@ -71,6 +71,7 @@ function gameReset()
 {
     //reset odświeża stronę
     // window.location.reload(true);
+    reset[0].innerHTML = "";
 
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
     result[0].innerHTML = "";
@@ -81,8 +82,8 @@ function gameReset()
 
 function gameOver() 
 {
-    let resetButton =  document.getElementsByClassName("reset-button");
-    resetButton[0].addEventListener("click", function(){
+    reset[0].innerHTML = "<button class='reset-button blue-button'>PLAY AGAIN</button>";
+    document.getElementsByClassName("reset-button")[0].addEventListener("click", function(){
         document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
         result[0].innerHTML = "";
         playerRound = 0;
@@ -93,7 +94,8 @@ function gameOver()
 
 function addPoints(player)
 {
-    result[0].innerHTML = player + " WIN";
+    // result[0].innerHTML = player + " WIN";
+    result[0].innerHTML = "<p>Player " + player + " win!</p>";
     isWin = true;
     
     if(player === "x")
@@ -176,7 +178,7 @@ function winCheck(gameState, player, trials)
     //DRAW
     if(trials == (rows*rows) && isWin == false) 
     {
-        result[0].innerHTML = " DRAW";
+        result[0].innerHTML = "<p> Draw!</p>";
         isWin = true;
         gameOver();
     }
@@ -215,12 +217,19 @@ function playGame()
 function generate()
 {
     document.getElementById("generate").addEventListener("click", function fieldGenerate(){
-        document.getElementsByClassName("play-field")[0].innerHTML = "";
-        
-        //nie działa z nowym formem
-        // rows = parseInt(document.getElementById("rows").value);
         rows = document.querySelector('input[name="rows"]:checked').value;
         rows *= 1;
+
+        document.getElementById("play-field").innerHTML = "<table class='play-field' data-size='" + rows + "'></table>"
+        document.getElementsByClassName("play-field")[0].innerHTML = "";
+        document.getElementsByClassName("ttt-img")[0].classList.add("ttt-non-vis");
+        setTimeout(function(){
+            document.getElementsByClassName("ttt-img")[0].style.display = "none"
+        }, 500);
+        
+
+        //nie działa z nowym formem
+        // rows = parseInt(document.getElementById("rows").value);
 
         for(let i = 0; i < rows; i++)
         {
@@ -233,6 +242,7 @@ function generate()
                 tr[i].innerHTML += "<td class='cell'></td>";
             }
         }
+        document.getElementById("play-field").classList.add("pf-vis");
         
         let td = document.getElementsByClassName("cell");
         let leftBorder = [], rightBorder = [];

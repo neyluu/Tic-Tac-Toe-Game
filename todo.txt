@@ -1,0 +1,1 @@
+w .right-window zrobic img tic tac toe, które znika po wygenerowaniu do opacity 0 z opacity 1
