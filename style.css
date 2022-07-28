@@ -69,6 +69,9 @@
     align-items: center;
     overflow: hidden;
 }
+.settings-svg:hover {
+    cursor: pointer;
+}
 
 .svg-settings {
     width: 70px;
@@ -111,7 +114,6 @@
 /* ----------------- */
 
 .main-left {
-    /* background-color: pink; */
     height: 100%;
     width: 30%;
     display: flex;
@@ -124,6 +126,7 @@
 .main-left h3 {
     color: white;
     text-shadow: 0px 0px 4px var(--blueMain);
+    text-align: center;
 }
 
 .window-left {
@@ -282,8 +285,9 @@ input[type=radio]:checked + .gform-label{
 .right-window {
     width: 700px;
     max-width: 100%;
-    height: 700px;
+    /* height: 700px; */
     max-height: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 3em;
     border: 2px solid var(--blueMain);
     background-color: var(--blueLighter);
@@ -296,7 +300,10 @@ input[type=radio]:checked + .gform-label{
 
 .ttt-img {
     width: 600px;
-    height: 600px;
+    max-width: 100%;
+    /* height: 600px; */
+    /* max-height: 100%; */
+    aspect-ratio: 1 / 1;
     position: absolute;
     opacity: 1;
     transition: opacity .5s;
@@ -304,13 +311,12 @@ input[type=radio]:checked + .gform-label{
 .ttt-non-vis {
     opacity: 0;
     transition: opacity .5s;
-    /* z-index: -1; */
 }
-
 
 /* -----PLAYFIELD----- */
 #play-field {
-    width: 100%;
+    width: 500px;
+    height: 500px;
     margin: 50px auto 0 auto;
     display: flex;
     justify-content: center;
@@ -324,14 +330,17 @@ input[type=radio]:checked + .gform-label{
 }
 
 table.play-field {
-    width: 500px;
-    height: 500px;
+    width: 75%;
+    aspect-ratio: 1 / 1;
     font-size: 75px;
     border-collapse: collapse;
     font-family: 'Nunito', sans-serif;
 }
 .play-field td {
     border: 5px solid var(--blueMain);
+}
+.play-field td:hover {
+    cursor: pointer;
 }
 
 .play-field[data-size="3"] tbody {
@@ -523,6 +532,9 @@ input:checked + .slider:before {
 
 
 @media screen and (max-height: 405px) {
+    #main-page {
+        overflow: scroll;
+    }
     .main-left {
         justify-content: start;
     }
@@ -534,11 +546,7 @@ input:checked + .slider:before {
 }
 @media screen and (max-width: 630px) {
     .main-left {
-        align-items: flex-start;
-    }
-    .window-left {
-        width: 165px;
-        max-width: 165px;
-        min-width: 165px;
+        align-items: flex-start;  
+        width: 165px;  
     }
 }
